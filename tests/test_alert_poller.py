@@ -91,8 +91,9 @@ class AlertPollerTests(unittest.TestCase):
         secrets_path = root / "email.env"
         secrets_path.write_text("PRIORITY_SPECIES=Common Swift\n")
         state_path = root / "alert_state.json"
+        log_path = root / "alerts.log"
 
-        return {"db": db_path, "secrets": secrets_path, "state": state_path}
+        return {"db": db_path, "secrets": secrets_path, "state": state_path, "log": log_path}
 
     def _patched_paths(self, paths: dict[str, Path]):
         return mock.patch.multiple(
@@ -100,6 +101,7 @@ class AlertPollerTests(unittest.TestCase):
             DB_PATH=paths["db"],
             SECRETS_PATH=paths["secrets"],
             STATE_PATH=paths["state"],
+            LOG_PATH=paths["log"],
         )
 
 

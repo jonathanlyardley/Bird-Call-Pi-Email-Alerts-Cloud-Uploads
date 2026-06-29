@@ -30,16 +30,19 @@ DEFAULT_CLIPS_ROOT = env_path("BIRD_CALL_AUDIO_DIR", "/data/audio")
 REVIEW_ROOT = env_path("BIRD_CALL_REVIEW_DIR", "/data/review")
 DEFAULT_STATION_LABEL = os.environ.get("BIRD_CALL_STATION_LABEL", "Bird monitoring station")
 
-if os.name == "nt":
-    logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-else:
-    LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
+log = logging.getLogger("alert_email")
+
+
+def configure_logging(log_path: Path = LOG_PATH) -> None:
+    if os.name == "nt":
+        logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+        return
+    log_path.parent.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
-        filename=str(LOG_PATH),
+        filename=str(log_path),
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(message)s",
     )
-log = logging.getLogger("alert_email")
 
 
 def load_secrets(path: Path) -> dict[str, str]:
@@ -224,6 +227,7 @@ def send_email(secrets: dict[str, str], subject: str, body: str, attachments: li
 
 
 def main() -> int:
+    configure_logging()
     try:
         secrets = load_secrets(SECRETS_PATH)
     except Exception:
