@@ -49,13 +49,14 @@ COOLDOWN_MINUTES = 5           # per-species
 log = logging.getLogger("alert_poller")
 
 
-def configure_logging(log_path: Path = LOG_PATH) -> None:
+def configure_logging(log_path: Path | None = None) -> None:
+    target_log_path = log_path or LOG_PATH
     if os.name == "nt":
         logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s poller: %(message)s")
         return
-    log_path.parent.mkdir(parents=True, exist_ok=True)
+    target_log_path.parent.mkdir(parents=True, exist_ok=True)
     logging.basicConfig(
-        filename=str(log_path),
+        filename=str(target_log_path),
         level=logging.INFO,
         format="%(asctime)s %(levelname)s poller: %(message)s",
     )
