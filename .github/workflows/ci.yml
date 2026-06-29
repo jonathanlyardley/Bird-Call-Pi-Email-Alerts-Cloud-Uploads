@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  checks:
+    name: Tests and safety checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Python tests
+        run: python3 -m unittest discover -s tests -p "test_*.py"
+
+      - name: Upload manifest test
+        run: bash tests/test_upload_weekly.sh
+
+      - name: Public repository checks
+        run: bash scripts/check-public-repo.sh

@@ -1,0 +1,46 @@
+# Local secrets and credentials
+.env
+.env.*
+secrets/
+rclone.conf
+*.pem
+*.key
+*.ppk
+id_rsa
+id_ed25519
+
+# Acoustic data and generated outputs
+*.wav
+*.flac
+*.mp3
+*.aac
+*.ogg
+audio/
+clips/
+data/
+review/
+detections/
+
+# Databases and logs
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+*.log
+logs/
+
+# Archives and support bundles
+*.tar.gz
+*.zip
+support-bundle*/
+
+# Python/editor clutter
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
