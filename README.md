@@ -2,7 +2,7 @@
 
 ## Practical Summary
 
-Field-tested Raspberry Pi scripts for BirdNET-Go users who want priority bird-call e-mail alerts, attached audio evidence, review artefacts, and safer cloud uploads that verify files before deleting local WAVs.
+Field-tested Raspberry Pi scripts for BirdNET-Go users who want a customisable bird-call e-mail alert, with confidence thresholds, attached audio clips, call isolation in bird call choruses, and safer cloud uploads that verify files before deleting local WAVs to ensure memory cards do not fill.
 
 ## What This Is Useful For
 
