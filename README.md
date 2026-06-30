@@ -47,6 +47,13 @@ bash scripts/upload_weekly.sh --dry-run
 
 See [docs/INSTALL.md](docs/INSTALL.md) for setup notes and [docs/SECURITY_AND_PRIVACY.md](docs/SECURITY_AND_PRIVACY.md) before making a public deployment.
 
+## Contributing And Project Status
+
+- Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening issues or pull requests.
+- Report security or privacy concerns using [SECURITY.md](SECURITY.md).
+- See [ROADMAP.md](ROADMAP.md) for planned maintainer-friendly improvements.
+- Release notes are tracked in [CHANGELOG.md](CHANGELOG.md).
+
 ## Configuration
 
 Useful environment variables:
