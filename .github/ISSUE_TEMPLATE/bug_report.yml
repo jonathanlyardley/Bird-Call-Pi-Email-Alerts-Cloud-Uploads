@@ -1,0 +1,56 @@
+name: Bug report
+description: Report a reproducible problem with the scripts or documentation.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Please remove secrets, raw audio, exact locations, private paths, and sensitive site details before posting.
+  - type: input
+    id: script
+    attributes:
+      label: Affected script or document
+      placeholder: scripts/upload_weekly.sh
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Describe the problem and the result you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Use redacted example paths and placeholder values.
+      placeholder: |
+        1. Set ...
+        2. Run ...
+        3. See ...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Raspberry Pi model, OS version, Python version, BirdNET-Go version, and relevant package versions if known.
+    validations:
+      required: false
+  - type: textarea
+    id: logs
+    attributes:
+      label: Redacted logs or output
+      description: Paste only the smallest useful redacted snippet. Do not include passwords, tokens, raw audio names that reveal sites, or exact locations.
+      render: text
+    validations:
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public safety check
+      options:
+        - label: I have removed secrets, raw audio, exact locations, and private deployment details.
+          required: true
