@@ -1,0 +1,44 @@
+name: Setup help
+description: Ask for help installing or configuring the toolkit.
+title: "[Setup]: "
+labels:
+  - setup-help
+body:
+  - type: markdown
+    attributes:
+      value: Please use placeholder paths and redact anything sensitive. Do not post passwords, tokens, raw audio, exact locations, or private site details.
+  - type: textarea
+    id: goal
+    attributes:
+      label: What are you trying to set up?
+      description: For example, e-mail alerts, review artefacts, or dry-run upload checks.
+    validations:
+      required: true
+  - type: textarea
+    id: hardware
+    attributes:
+      label: Hardware and software
+      description: Raspberry Pi model, OS version, Python version, BirdNET-Go status, and whether rclone is configured.
+    validations:
+      required: false
+  - type: textarea
+    id: steps
+    attributes:
+      label: What have you tried?
+      description: Include commands and output after removing sensitive values.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Where are you stuck?
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Public safety check
+      options:
+        - label: I have removed secrets, raw audio, exact locations, and private deployment details.
+          required: true
