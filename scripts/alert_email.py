@@ -85,9 +85,8 @@ def read_event() -> dict:
     for key, value in os.environ.items():
         if key.startswith(("NOTIFICATION_", "BIRDNET_", "DETECTION_", "METADATA_", "BN_")):
             data.setdefault(key, value)
-    # Log the raw event keys to help diagnose field-name drift.
+    # Log only keys, not values: event values can include sensitive site or species details.
     log.info("raw event keys=%s", sorted(data.keys()))
-    log.info("raw event (truncated) =%s", json.dumps(data, default=str)[:1000])
     return data
 
 
@@ -276,8 +275,8 @@ def main() -> int:
     )
 
     log.info(
-        "event species=%r scientific=%r confidence=%s clip=%r",
-        common, scientific, confidence, clip_name,
+        "event fields: species=%s scientific=%s confidence=%s clip=%s",
+        bool(common), bool(scientific), confidence != "?", bool(clip_name),
     )
 
     if not common:
@@ -289,9 +288,9 @@ def main() -> int:
     common_lc = common.lower()
     matched = next((p for p in priority if p in common_lc or common_lc in p), None)
     if matched is None:
-        log.info("not a priority species: %s", common)
+        log.info("event species was not in the priority list")
         return 0
-    log.info("priority match: %s matched rule %r", common, matched)
+    log.info("priority species matched configured alert list")
 
     clip_path = find_clip(clip_name)
     review_audio_path = find_existing_path(review_audio_name) or find_review_audio_for_clip(clip_name)
@@ -310,7 +309,7 @@ def main() -> int:
 
     try:
         send_email(secrets, subject, body, [clip_path, review_audio_path])
-        log.info("email sent for %s (clip=%s review_audio=%s)", common, clip_path, review_audio_path)
+        log.info("email sent for priority species detection")
     except Exception:
         log.exception("send_email failed")
         return 3
